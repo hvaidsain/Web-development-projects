@@ -1,0 +1,11 @@
+body{
+				font-family: sans-serif;
+			}
+
+			#time{
+				font-weight: bold;
+			}
+
+			#square{
+				position: relative;
+			}

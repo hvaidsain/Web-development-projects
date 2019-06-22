@@ -12,6 +12,11 @@ This is a fun game in which you can test your response time by clicking on the a
 you can.
 Challenge your friends in this game and see who has the better reaction time !! Have Fun !!
 
+# 3 Form Validation
+
+A mini form validation using jQuery which checks for valid email address, telephone number and password.
+
+
 
 
 

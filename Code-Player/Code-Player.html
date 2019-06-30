@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+	<html>
+	<head>
+		<title>Code Player</title>
+
+		<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.0.min.js"></script>
+
+		<style type="text/css">
+			body{
+
+				font-family: sans-serif;
+
+			}
+
+
+			#menubar{
+
+				width: 100%;
+				height: 25px;
+				background-color: #EEEEEE;
+				padding: 5px;
+				float: left;
+
+			}
+
+			#logo{
+				font-weight: bold;
+				font-size : 120%;
+				float: left;
+			}
+
+			#button-container{
+				
+				width: 250px;
+				height: 25px;
+				margin:0 auto;
+
+
+			}
+
+			.menu-buttons{
+				float: left;
+				padding: 3px 5px;
+				border : 1px solid grey;
+				border-left: none;
+			}
+
+			#html{
+				border-left: 1px solid grey;
+				border-top-left-radius: 5px;
+				border-bottom-left-radius: 5px;
+
+			}
+
+			#output{
+
+				border-top-right-radius: 5px;
+				border-bottom-right-radius: 5px;
+
+			}
+			.active{
+				background-color: #0095FF;
+			}
+
+			.hover-color{
+				background-color: #F7F8FA;
+			}
+
+			/*textarea{
+				width: 50%;
+				height: 700px;
+
+			}*/
+
+			.panel{
+				float: left;
+				width: 45%;
+				height: 700px;
+				border : 1px solid grey;
+			}
+
+			
+			
+
+		</style>
+
+
+	</head>
+	<body>
+
+		<div id="menubar">
+			
+			<div id="logo">
+				CODE PLAYER
+			</div>
+
+
+			<div id="button-container">
+				
+				<div class="menu-buttons active" id="html">Html</div>
+
+				<div class="menu-buttons" id="css">Css</div>
+
+				<div class="menu-buttons" id="javascript">Javascript</div>
+
+				<div class="menu-buttons active" id="output">Output</div>
+
+
+
+			</div>
+
+
+
+		</div>
+
+		<div id="body-container">
+			
+			<textarea id="html-panel" class="panel"> 
+				hello world
+			</textarea>
+
+			<iframe src="" id="output-panel" class="panel"></iframe>
+
+
+		</div>
+
+
+		<script type="text/javascript">
+			
+			$(".menu-buttons").hover(function(){
+				$(this).addClass("hover-color");
+			},function(){
+				$(this).removeClass("hover-color");
+			});
+
+			$(".menu-buttons").click(function(){
+				$(this).toggleClass("active");
+				$(this).removeClass("hover-color");
+			});
+
+			$("#html-panel").on('change keyup paste', function() {
+    
+				$("iframe").contents().find('html').html($("#html-panel").val());
+
+			});
+
+
+
+		</script>
+
+	</body>
+</html>

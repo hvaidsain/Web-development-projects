@@ -38,7 +38,7 @@
 
 			}
 
-			.menu-buttons{
+			.toggle-buttons{
 				float: left;
 				padding: 3px 5px;
 				border : 1px solid grey;
@@ -74,9 +74,12 @@
 
 			.panel{
 				float: left;
-				width: 45%;
-				height: 700px;
+				resize: none;
+				
 				border : 1px solid grey;
+			}
+			.hidden{
+				display: none;
 			}
 
 			
@@ -91,19 +94,19 @@
 		<div id="menubar">
 			
 			<div id="logo">
-				CODE PLAYER
+				CodePLAYER
 			</div>
 
 
 			<div id="button-container">
 				
-				<div class="menu-buttons active" id="html">Html</div>
+				<div class="toggle-buttons active" id="html">Html</div>
 
-				<div class="menu-buttons" id="css">Css</div>
+				<div class="toggle-buttons" id="css">Css</div>
 
-				<div class="menu-buttons" id="javascript">Javascript</div>
+				<div class="toggle-buttons" id="javascript">Javascript</div>
 
-				<div class="menu-buttons active" id="output">Output</div>
+				<div class="toggle-buttons active" id="output">Output</div>
 
 
 
@@ -115,34 +118,67 @@
 
 		<div id="body-container">
 			
-			<textarea id="html-panel" class="panel"> 
-				hello world
+			<textarea id="htmlPanel" class="panel"> 
+				<p id="content">hello world</p>
 			</textarea>
 
-			<iframe src="" id="output-panel" class="panel"></iframe>
+			<textarea id="cssPanel" class="panel hidden"> 
+				p{
+				color : red;
+			}
+			</textarea>
+
+			<textarea id="javascriptPanel" class="panel hidden"> 
+				document.getElementById("content").innerHTML = "Hey Harsh...What's UP!";
+			</textarea>
+
+			<iframe src="" id="outputPanel" class="panel"></iframe>
 
 
 		</div>
 
 
 		<script type="text/javascript">
+
+			function output() {
+				// body...
+				$("iframe").contents().find('html').html("<html><head><style type='text/css'>" +$("#cssPanel").val() + "</style></head><body>" +$("#htmlPanel").val()+ "</body></html>");
+
+				document.getElementById("outputPanel").contentWindow.eval($("#javascriptPanel").val());
+			}
 			
-			$(".menu-buttons").hover(function(){
+			$(".toggle-buttons").hover(function(){
 				$(this).addClass("hover-color");
 			},function(){
 				$(this).removeClass("hover-color");
 			});
 
-			$(".menu-buttons").click(function(){
+			$(".toggle-buttons").click(function(){
 				$(this).toggleClass("active");
 				$(this).removeClass("hover-color");
+				var panelid = $(this).attr("id")+"Panel";
+
+				$("#"+panelid).toggleClass("hidden");
+
+				var noOfActivePanels = 4 - $(".hidden").length;
+
+				$(".panel").width($(window).width() /noOfActivePanels -15)
+
+
+
 			});
 
-			$("#html-panel").on('change keyup paste', function() {
+			$("textarea").on('change keyup paste', function() {
     
-				$("iframe").contents().find('html').html($("#html-panel").val());
+				output();
 
 			});
+
+			output();
+
+			$(".panel").height($(window).height() - $("#menubar").height()-15)
+
+			$(".panel").width($(window).width() /2 -15)
 
 
 
